@@ -1,0 +1,5 @@
+/*Saca todas las request bloqueadas entre dos fechas*/
+AzureDiagnostics 
+| where ResourceProvider == "MICROSOFT.NETWORK" and Category == "ApplicationGatewayFirewallLog"
+and TimeGenerated >= todatetime('20210722') and TimeGenerated < todatetime('20210723')
+| order by  ruleId_s, Message
