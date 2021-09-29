@@ -1,0 +1,1 @@
+InsightsMetrics | where Origin == 'vm.azm.ms' | where Namespace == 'LogicalDisk' and Name == 'FreeSpacePercentage' | extend Disk=tostring(todynamic(Tags)['vm.azm.ms/mountId']) | summarize AggregatedValue = avg(Val) by bin(TimeGenerated, 15m), Computer, _ResourceId, Disk

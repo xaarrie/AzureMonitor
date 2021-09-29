@@ -1,0 +1,6 @@
+/*Consulta para sacar la agrupación de tipos de request bloquados*/
+AzureDiagnostics
+| where ResourceProvider == "MICROSOFT.NETWORK" and Category == "ApplicationGatewayFirewallLog"
+| summarize count() by ruleId_s,ruleGroup_s, bin(TimeGenerated, 1m), Message
+| where count_ > 0
+| render timechart
